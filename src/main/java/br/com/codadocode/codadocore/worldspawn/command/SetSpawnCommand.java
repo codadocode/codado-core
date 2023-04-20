@@ -1,6 +1,7 @@
 package br.com.codadocode.codadocore.worldspawn.command;
 
 import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -15,8 +16,15 @@ public class SetSpawnCommand implements CommandExecutor {
         if (commandSender instanceof Player)   {
             Player player = (Player) commandSender;
             Location playerLocation = player.getLocation();
+
+            String spawnName = "default";
+            if (strings.length > 0)   {
+                spawnName = strings[0];
+            }
+
             World actualWorld = player.getWorld();
-            //WorldSpawnManager.getInstance().
+            WorldSpawnManager.<WorldSpawnManager>getInstance().saveSpawn(actualWorld, playerLocation, spawnName);
+            Bukkit.getServer().getLogger().info("Spawn do mundo salvo.");
         }
         return true;
     }

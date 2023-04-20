@@ -1,7 +1,18 @@
 package br.com.codadocode.codadocore.core;
 
-import java.lang.reflect.InvocationTargetException;
+public class BaseSingleton  {
+    private static BaseSingleton instance;
 
-public class BaseSingleton<T>   {
+    protected BaseSingleton()   {
+        setInstance(this);
+    }
 
+    private void setInstance(BaseSingleton baseSingleton)   {
+        if (instance != null) return;
+        instance = baseSingleton;
+    }
+
+    public static <T extends BaseSingleton> T getInstance()   {
+        return (T)instance;
+    }
 }

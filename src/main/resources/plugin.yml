@@ -2,3 +2,12 @@
   main: br.com.codadocode.codadocore.CodadoCore
   version: 0.1
   api-version: 1.19
+  commands:
+    setspawn:
+      description: Set world spawn origin point.
+      usage: /setspawn
+      permission: br.com.codadocode.codadocore.setspawn
+    spawn:
+      description: Teleport to spawn point
+      usage: /spawn
+      permission: br.com.codadocode.codadocore.spawn
