@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -69,6 +66,12 @@
       <workItem from="1681516108062" duration="5364000" />
       <workItem from="1681586942029" duration="82000" />
       <workItem from="1681605413286" duration="16192000" />
+      <workItem from="1696560278334" duration="1229000" />
+      <workItem from="1696647105626" duration="1381000" />
+      <workItem from="1697593432776" duration="1547000" />
+      <workItem from="1697644634280" duration="1413000" />
+      <workItem from="1697693307831" duration="4048000" />
+      <workItem from="1697720203192" duration="14879000" />
     </task>
     <servers />
   </component>
