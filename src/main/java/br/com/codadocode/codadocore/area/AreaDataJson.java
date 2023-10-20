@@ -2,7 +2,6 @@ package br.com.codadocode.codadocore.area;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class AreaDataJson {
     private String areaName;

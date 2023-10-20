@@ -1,18 +1,21 @@
 package br.com.codadocode.codadocore.core;
 
-public class BaseSingleton  {
+public class  BaseSingleton {
     private static BaseSingleton instance;
 
     protected BaseSingleton()   {
-        setInstance(this);
+        instance = this;
     }
 
-    private void setInstance(BaseSingleton baseSingleton)   {
-        if (instance != null) return;
-        instance = baseSingleton;
+    public static BaseSingleton getInstance()   {
+        if (instance == null)   {
+            instance = new BaseSingleton();
+        }
+
+        return instance;
     }
 
-    public static <T extends BaseSingleton> T getInstance()   {
+    public <T> T cast()   {
         return (T)instance;
     }
 }

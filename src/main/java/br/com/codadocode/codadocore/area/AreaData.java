@@ -1,8 +1,6 @@
 package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.ConvertUtility;
-import br.com.codadocode.codadocore.core.Vector3;
-import br.com.codadocode.codadocore.player.PlayerInfo;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

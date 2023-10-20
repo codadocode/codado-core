@@ -1,14 +1,17 @@
 package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.BaseSingleton;
-
+import org.bukkit.entity.Player;
 import java.util.*;
 
 public class AreaManager extends BaseSingleton {
     private Map<AreaID, AreaData> areas;
+    private Map<Player, AreaPlayer> players;
 
     public AreaManager()   {
+        super();
         this.areas = new HashMap<AreaID, AreaData>();
+        this.players = new HashMap<>();
     }
 
     public boolean createArea(String areaName, AreaSize areaSize, UUID ownerID)   {
@@ -41,5 +44,20 @@ public class AreaManager extends BaseSingleton {
         if (!this.areas.containsKey(area.getAreaID())) return Optional.empty();
 
         return Optional.of(this.areas.get(area.getAreaID()));
+    }
+
+    public boolean registerPlayerOnManager(Player player)   {
+        if (this.players.containsKey(player)) return false;
+
+        AreaPlayer areaPlayer = new AreaPlayer(player);
+        this.players.put(player, areaPlayer);
+        return true;
+    }
+
+    public boolean unRegisterPlayerOnManager(Player player)   {
+        if (!this.players.containsKey(player)) return false;
+
+        this.players.remove(player);
+        return true;
     }
 }

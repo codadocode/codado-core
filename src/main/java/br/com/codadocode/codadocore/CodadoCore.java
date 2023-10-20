@@ -1,5 +1,6 @@
 package br.com.codadocode.codadocore;
 
+import br.com.codadocode.codadocore.area.event.AreaEvent;
 import br.com.codadocode.codadocore.core.BaseSingleton;
 import br.com.codadocode.codadocore.core.DataFolder;
 import br.com.codadocode.codadocore.core.Vector3;
@@ -60,5 +61,6 @@ public class CodadoCore extends JavaPlugin {
 
     private void registerEvents()   {
         this.getServer().getPluginManager().registerEvents(new NametagEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new AreaEvent(), this);
     }
 }
