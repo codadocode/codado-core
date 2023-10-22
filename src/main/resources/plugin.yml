@@ -11,3 +11,11 @@
       description: Teleport to spawn point
       usage: /spawn
       permission: br.com.codadocode.codadocore.spawn
+    areacreate:
+      description: Create new area
+      usage: /areacreate
+      permission: br.com.codadocode.codadocore.areacreate
+    areainfo:
+      description: Show are info
+      usage: /areainfo
+      permission: br.com.codadocode.codadocore.areainfo

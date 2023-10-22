@@ -1,23 +1,29 @@
 package br.com.codadocode.codadocore;
 
+import br.com.codadocode.codadocore.area.AreaManager;
+import br.com.codadocode.codadocore.area.command.CreateAreaCommand;
+import br.com.codadocode.codadocore.area.command.ShowAreaInfoCommand;
 import br.com.codadocode.codadocore.area.event.AreaEvent;
-import br.com.codadocode.codadocore.core.BaseSingleton;
 import br.com.codadocode.codadocore.core.DataFolder;
-import br.com.codadocode.codadocore.core.Vector3;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
 import br.com.codadocode.codadocore.hidename.NametagManager;
-import br.com.codadocode.codadocore.worldspawn.WorldSpawnData;
 import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
 import br.com.codadocode.codadocore.worldspawn.command.SetSpawnCommand;
 import br.com.codadocode.codadocore.worldspawn.command.SpawnCommand;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CodadoCore extends JavaPlugin {
     private File dataFolder;
     private NametagManager nametagManager;
     private WorldSpawnManager worldSpawnManager;
+    private AreaManager areaManager;
 
     @Override
     public void onEnable()   {
@@ -27,6 +33,7 @@ public class CodadoCore extends JavaPlugin {
         registerEvents();
         registerCommands();
         loadData();
+        initializeRunnables();
         this.getLogger().info("Finished!");
     }
 
@@ -39,6 +46,21 @@ public class CodadoCore extends JavaPlugin {
         prepareDataFolder();
     }
 
+    private void initializeRunnables()   {
+        new BukkitRunnable()   {
+
+            @Override
+            public void run() {
+                AreaManager areaManager = AreaManager.getInstance().cast();
+                List<Player> onlinePlayers = new ArrayList<>(Bukkit.getServer().getOnlinePlayers());
+                for (int i = 0; i < onlinePlayers.size(); i++)   {
+                    Player actualPlayer = onlinePlayers.get(i);
+                    areaManager.updatePlayerRegion(actualPlayer);
+                }
+            }
+        }.runTaskTimer(this, 0,20L);
+    }
+
     private void prepareDataFolder()   {
         if (!this.getDataFolder().exists()) this.getDataFolder().mkdirs();
         this.dataFolder = this.getDataFolder();
@@ -48,6 +70,8 @@ public class CodadoCore extends JavaPlugin {
     private void registerCommands()   {
         this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         this.getCommand("spawn").setExecutor(new SpawnCommand());
+        this.getCommand("areacreate").setExecutor(new CreateAreaCommand());
+        this.getCommand("areainfo").setExecutor(new ShowAreaInfoCommand());
     }
 
     private void loadData()   {
@@ -57,6 +81,7 @@ public class CodadoCore extends JavaPlugin {
     private void buildManagers()   {
         this.nametagManager = new NametagManager();
         this.worldSpawnManager = new WorldSpawnManager(this.dataFolder, "worldspawns");
+        this.areaManager = new AreaManager();
     }
 
     private void registerEvents()   {

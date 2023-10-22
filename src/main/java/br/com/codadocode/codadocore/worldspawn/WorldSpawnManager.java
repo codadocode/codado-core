@@ -7,7 +7,6 @@ import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -25,12 +24,12 @@ public class WorldSpawnManager extends BaseSingleton {
     }
 
     public void saveSpawn(@NotNull World world, @NotNull Location spawnLocation, @NotNull String spawnName)   {
-        Vector3 position = ConvertUtility.LocationToVector3(spawnLocation);
+        Vector3 position = ConvertUtility.locationToVector3(spawnLocation);
         WorldSpawnData worldSpawnData = new WorldSpawnData(world.getName(), position, spawnName);
         WorldSpawn worldSpawn = new WorldSpawn(worldSpawnData);
         this.worldSpawnMap.put(spawnName, worldSpawn);
         this.jsonManager.saveToFile(world.getName(), worldSpawnData, worldSpawnData.getClass());
-        if (spawnName.equals("default")) world.setSpawnLocation(position.getX(), position.getY(), position.getZ());
+        if (spawnName.equals("default")) world.setSpawnLocation((int)position.getX(), (int)position.getY(), (int)position.getZ());
     }
 
     public void loadAllSpawnData()   {
@@ -46,7 +45,7 @@ public class WorldSpawnManager extends BaseSingleton {
                     this.worldSpawnMap.put(spawnName, worldSpawn);
                     if (spawnName.equals("default"))   {
                         Vector3 spawnPosition = actualWorldSpawnData.getSpawnPosition();
-                        findedWorld.setSpawnLocation(spawnPosition.getX(), spawnPosition.getY(), spawnPosition.getZ());
+                        findedWorld.setSpawnLocation((int)spawnPosition.getX(), (int)spawnPosition.getY(), (int)spawnPosition.getZ());
                     }
                 }
             }

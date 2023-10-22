@@ -1,80 +1,82 @@
 package br.com.codadocode.codadocore.area;
 
+import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.ConvertUtility;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class AreaData {
-    private AreaSize areaSize;
-    private AreaID mainArea;
-    private List<AreaID> subAreas;
-    private Map<AREA_FLAG, Boolean> areaFlags;
+    private CodadoLog log;
     private String areaName;
-    private String enterMessage;
-    private String exitMessage;
-    private AreaID areaID;
-    private UUID ownerID;
-    private List<UUID> members;
-    private List<UUID> playersInsideArea;
+    private Player owner;
+    private List<Player> members;
+    private List<Player> insidePlayers;
+    private Map<AREA_FLAG, Boolean> flags;
+    private AreaSize areaSize;
 
-    public AreaData(String areaName, AreaSize areaSize, UUID ownerID)   {
+    public AreaData(String areaName, AreaSize areaSize, Player owner)   {
         this.areaName = areaName;
         this.areaSize = areaSize;
-        this.areaID = new AreaID(UUID.randomUUID());
-        this.ownerID = ownerID;
+        this.owner = owner;
+        this.log = new CodadoLog(this.areaName);
+        this.flags = AreaFlagBuilder.buildDefaultFlags();
         this.members = new ArrayList<>();
-        this.playersInsideArea = new ArrayList<>();
+        this.insidePlayers = new ArrayList<>();
     }
 
-    public AreaData(String areaName, AreaSize areaSize, AreaID mainAreaID, UUID ownerID)   {
-        this(areaName, areaSize, ownerID);
-        this.mainArea = mainAreaID;
-    }
+    public Optional<AreaData> checkPlayerInside(Player player)   {
+        boolean isInside = this.areaSize.isInside(ConvertUtility.locationToVector3(player.getLocation()));
 
-    public AreaID getAreaID()   {
-        return this.areaID;
-    }
-
-    public boolean addSubArea(AreaData subAreaData)   {
-        if (this.subAreas.contains(subAreaData.areaID)) return false;
-
-        this.subAreas.add(subAreaData.areaID);
-        return true;
-    }
-
-    public boolean removeSubArea(AreaData subAreaData)   {
-        if (!this.subAreas.contains(subAreaData.areaID)) return false;
-
-        this.subAreas.remove(subAreaData.areaID);
-        return true;
-    }
-
-    public boolean checkPlayerInside(Player player)   {
-        boolean isPlayerInside = this.areaSize.isInside(ConvertUtility.LocationToVector3(player.getLocation()));
-        if (isPlayerInside)   {
+        if (isInside)   {
             addPlayerInside(player);
-            return true;
-        }else   {
-            removePlayerInside(player);
-            return false;
+            return Optional.of(this);
         }
+
+        return Optional.empty();
     }
 
     private boolean addPlayerInside(Player player)   {
-        if (this.playersInsideArea.contains(player.getUniqueId())) return false;
+        if (this.insidePlayers.contains(player)) return false;
 
-        this.playersInsideArea.add(player.getUniqueId());
+        this.insidePlayers.add(player);
         return true;
     }
 
     private boolean removePlayerInside(Player player)   {
-        if (!this.playersInsideArea.contains(player.getUniqueId())) return false;
+        if (!this.insidePlayers.contains(player)) return false;
 
-        this.playersInsideArea.remove(player.getUniqueId());
+        this.insidePlayers.remove(player);
+        return true;
+    }
+
+    public boolean addMember(Player sender, Player playerToAdd)   {
+        if (this.members.contains(playerToAdd) || !sender.equals(this.owner)) return false;
+
+        this.members.add(playerToAdd);
+        return true;
+    }
+
+    public boolean removeMember(Player sender, Player playerToRemove)   {
+        if (!this.members.contains(playerToRemove) || !sender.equals(this.owner)) return false;
+
+        this.members.remove(playerToRemove);
+        return true;
+    }
+
+    public String getAreaName()   {
+        return this.areaName;
+    }
+
+    public boolean isOwner(Player player)   {
+        if (!this.owner.equals(player)) return false;
+
+        return true;
+    }
+
+    public boolean isMember(Player player)   {
+        if (!this.members.equals(player)) return false;
+
         return true;
     }
 }

@@ -23,7 +23,8 @@ public class SpawnCommand implements CommandExecutor {
             if (strings.length > 0)   {
                 spawnName = strings[0];
             }
-            Optional<WorldSpawnData> findedWorldData = WorldSpawnManager.<WorldSpawnManager>getInstance().findWorldSpawnData(spawnName);
+            WorldSpawnManager worldSpawnManager = WorldSpawnManager.<WorldSpawnManager>getInstance().cast();
+            Optional<WorldSpawnData> findedWorldData = worldSpawnManager.findWorldSpawnData(spawnName);
             if (findedWorldData.isPresent())   {
                 WorldSpawnData worldSpawnData = findedWorldData.get();
                 Vector3 spawnPosition = worldSpawnData.getSpawnPosition();

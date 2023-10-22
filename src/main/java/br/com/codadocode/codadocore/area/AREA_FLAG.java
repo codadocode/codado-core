@@ -16,5 +16,5 @@ public enum AREA_FLAG {
     TNT_EXPLOSION,
     MONSTER_EXPLOSION,
     CAN_DROP_ITEMS,
-    CAN_CHAT,
+    CAN_CHAT;
 }

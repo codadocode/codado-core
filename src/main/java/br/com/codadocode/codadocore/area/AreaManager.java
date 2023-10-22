@@ -1,49 +1,20 @@
 package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.BaseSingleton;
+import br.com.codadocode.codadocore.core.CodadoLog;
 import org.bukkit.entity.Player;
 import java.util.*;
 
 public class AreaManager extends BaseSingleton {
-    private Map<AreaID, AreaData> areas;
+    private CodadoLog log;
+    private Map<String, AreaData> areas;
     private Map<Player, AreaPlayer> players;
 
     public AreaManager()   {
         super();
-        this.areas = new HashMap<AreaID, AreaData>();
+        this.log = new CodadoLog("AreaManager");
+        this.areas = new HashMap<String, AreaData>();
         this.players = new HashMap<>();
-    }
-
-    public boolean createArea(String areaName, AreaSize areaSize, UUID ownerID)   {
-        AreaData area = new AreaData(areaName, areaSize, ownerID);
-        this.areas.put(area.getAreaID(), area);
-        return true;
-    }
-
-    public boolean createSubArea(String areaName, AreaSize areaSize, UUID ownerID, AreaID mainAreaID)   {
-        AreaData area = new AreaData(areaName, areaSize, mainAreaID, ownerID);
-        this.areas.put(area.getAreaID(), area);
-        return true;
-    }
-
-    public boolean removeArea(AreaData area)   {
-        if (!this.areas.containsKey(area.getAreaID())) return false;
-
-        this.areas.remove(area);
-        return true;
-    }
-
-    public boolean removeArea(AreaID areaID)   {
-        if (!this.areas.containsKey(areaID)) return false;
-
-        AreaData findedArea = this.areas.get(areaID);
-        return removeArea(findedArea);
-    }
-
-    private Optional<AreaData> findArea(AreaData area)   {
-        if (!this.areas.containsKey(area.getAreaID())) return Optional.empty();
-
-        return Optional.of(this.areas.get(area.getAreaID()));
     }
 
     public boolean registerPlayerOnManager(Player player)   {
@@ -58,6 +29,49 @@ public class AreaManager extends BaseSingleton {
         if (!this.players.containsKey(player)) return false;
 
         this.players.remove(player);
+        return true;
+    }
+
+    public void updatePlayerRegion(Player player)   {
+        Optional<AreaPlayer> optAreaPlayer = getAreaPlayer(player);
+        if (optAreaPlayer.isEmpty()) return;
+
+        AreaPlayer areaPlayer = optAreaPlayer.get();
+        for (AreaData areaData : this.areas.values())   {
+            Optional<AreaData> optInsideArea = areaData.checkPlayerInside(areaPlayer.getPlayer());
+            if (optInsideArea.isEmpty()) continue;
+
+            AreaData insideArea = optInsideArea.get();
+            areaPlayer.setActualRegion(insideArea);
+            this.log.showInfo(areaPlayer.getPlayer().getName() + " esta dentro da area '" + insideArea.getAreaName() + "'");
+            return;
+        }
+
+        areaPlayer.setActualRegion(null);
+    }
+
+    private Optional<AreaPlayer> getAreaPlayer(Player player)   {
+        if (!this.players.containsKey(player)) return Optional.empty();
+
+        return Optional.of(this.players.get(player));
+    }
+
+    public boolean createArea(Player sender, AreaData areaData)   {
+        if (this.areas.containsKey(areaData.getAreaName())) return false;
+
+        this.areas.put(areaData.getAreaName(), areaData);
+        this.log.showInfo("Area '" + areaData.getAreaName() + "' foi criada com sucesso!");
+        return true;
+    }
+
+    public boolean removeArea(Player sender, String areaName)   {
+        if (!this.areas.containsKey(areaName)) return false;
+
+        AreaData areaData = this.areas.get(areaName);
+        if (!areaData.isOwner(sender) || sender.hasPermission("br.com.codadocode.codadocore.area.admin")) return false;
+
+        this.areas.remove(areaName);
+        this.log.showInfo("Area '" + areaData.getAreaName() + "' foi removida com sucesso!");
         return true;
     }
 }

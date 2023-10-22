@@ -10,6 +10,7 @@ public class AreaSize {
     public AreaSize(int horizontalSize, int verticalSize, Vector3 center)   {
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
+        this.center = center;
     }
 
     public int getHorizontalSize()   {
@@ -24,16 +25,16 @@ public class AreaSize {
         return this.center;
     }
 
+    public String getSizeInfo()   {
+        return "Centro:" + this.center + ", TamanhoHorizontal:" + this.horizontalSize + ", TamanhoVertical:" + this.verticalSize;
+    }
+
     public boolean isInside(Vector3 position)   {
-        int leftPos = this.center.getX() - this.horizontalSize;
-        int rightPos = this.center.getX() + this.horizontalSize;
-        int frontPos = this.center.getZ() + this.horizontalSize;
-        int backPos = this.center.getZ() - this.horizontalSize;
+        boolean insideX = position.getX() < this.center.getX() + this.horizontalSize && position.getX() > this.center.getX() - this.horizontalSize;
+        boolean insideZ = position.getZ() < this.center.getZ() + this.horizontalSize && position.getZ() > this.center.getZ() - this.horizontalSize;
+        boolean insideY = position.getY() < this.center.getY() + this.verticalSize && position.getY() > this.center.getY() - this.verticalSize;
 
-        int topPos = this.center.getY() + this.verticalSize;
-        int bottomPos = this.center.getY() - this.verticalSize;
-
-        if ((position.getX() >= leftPos) && (position.getX() <= rightPos) && (position.getZ() <= frontPos) && (position.getZ() <= backPos) && (position.getY() <= topPos) && (position.getY() >= bottomPos)) return true;
+        if (insideX && insideY && insideZ) return true;
         else return false;
     }
 }

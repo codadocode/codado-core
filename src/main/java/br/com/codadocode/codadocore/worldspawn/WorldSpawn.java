@@ -15,7 +15,7 @@ public class WorldSpawn {
 
     public Optional<WorldSpawnData> saveSpawn(String worldName, Location location, String spawnName)   {
         if (!worldName.equals(this.worldSpawnData.getWorldName())) return Optional.empty();
-        Vector3 position = ConvertUtility.LocationToVector3(location);
+        Vector3 position = ConvertUtility.locationToVector3(location);
         this.worldSpawnData.setSpawnPosition(position);
         return Optional.of(new WorldSpawnData(worldName, position, spawnName));
     }

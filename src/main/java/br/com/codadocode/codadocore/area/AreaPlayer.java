@@ -1,6 +1,9 @@
 package br.com.codadocode.codadocore.area;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class AreaPlayer {
     private Player player;
@@ -17,5 +20,9 @@ public class AreaPlayer {
 
     public AreaData getActualRegion()   {
         return this.actualRegion;
+    }
+
+    public Player getPlayer()   {
+        return this.player;
     }
 }

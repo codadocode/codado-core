@@ -1,9 +1,9 @@
 package br.com.codadocode.codadocore.core;
 
 public class Vector3 {
-    private int x;
-    private int y;
-    private int z;
+    private double x;
+    private double y;
+    private double z;
 
     public Vector3()   {
         this.x = 0;
@@ -17,21 +17,21 @@ public class Vector3 {
         this.z = value.getZ();
     }
 
-    public Vector3(int x, int y, int z)   {
+    public Vector3(double x, double y, double z)   {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public int getX()   {
+    public double getX()   {
         return this.x;
     }
 
-    public int getY()   {
+    public double getY()   {
         return this.y;
     }
 
-    public int getZ()   {
+    public double getZ()   {
         return this.z;
     }
 }
