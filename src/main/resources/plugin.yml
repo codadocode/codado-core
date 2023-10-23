@@ -19,3 +19,7 @@
       description: Show are info
       usage: /areainfo
       permission: br.com.codadocode.codadocore.areainfo
+    areasetowner:
+      description: Set owner area
+      usage: /areasetowner
+      permission: br.com.codadocode.codadocore.areasetowner

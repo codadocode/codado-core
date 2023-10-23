@@ -11,16 +11,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class WorldSpawnManager extends BaseSingleton {
+public class WorldSpawnManager {
+    private static WorldSpawnManager instance;
     private HashMap<String, WorldSpawn> worldSpawnMap;
     private DataFolder worldSpawnManagerDataFolder;
     private JsonManager jsonManager;
 
     public WorldSpawnManager(File dataFolder, String subDataFolder)   {
-        super();
+        if (instance == null) instance = this;
+
         this.worldSpawnMap = new HashMap<>();
         this.worldSpawnManagerDataFolder = new DataFolder(dataFolder, subDataFolder);
         this.jsonManager = new JsonManager(this.worldSpawnManagerDataFolder);
+    }
+
+    public static WorldSpawnManager getInstance()   {
+        return instance;
     }
 
     public void saveSpawn(@NotNull World world, @NotNull Location spawnLocation, @NotNull String spawnName)   {

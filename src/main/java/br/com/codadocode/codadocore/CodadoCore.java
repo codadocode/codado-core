@@ -2,6 +2,7 @@ package br.com.codadocode.codadocore;
 
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.command.CreateAreaCommand;
+import br.com.codadocode.codadocore.area.command.SetAreaOwnerCommand;
 import br.com.codadocode.codadocore.area.command.ShowAreaInfoCommand;
 import br.com.codadocode.codadocore.area.event.AreaEvent;
 import br.com.codadocode.codadocore.core.DataFolder;
@@ -51,7 +52,7 @@ public class CodadoCore extends JavaPlugin {
 
             @Override
             public void run() {
-                AreaManager areaManager = AreaManager.getInstance().cast();
+                AreaManager areaManager = (AreaManager) AreaManager.getInstance();
                 List<Player> onlinePlayers = new ArrayList<>(Bukkit.getServer().getOnlinePlayers());
                 for (int i = 0; i < onlinePlayers.size(); i++)   {
                     Player actualPlayer = onlinePlayers.get(i);
@@ -70,8 +71,10 @@ public class CodadoCore extends JavaPlugin {
     private void registerCommands()   {
         this.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         this.getCommand("spawn").setExecutor(new SpawnCommand());
+
         this.getCommand("areacreate").setExecutor(new CreateAreaCommand());
         this.getCommand("areainfo").setExecutor(new ShowAreaInfoCommand());
+        this.getCommand("areasetowner").setExecutor(new SetAreaOwnerCommand());
     }
 
     private void loadData()   {

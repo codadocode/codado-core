@@ -1,20 +1,27 @@
 package br.com.codadocode.codadocore.area;
 
-import br.com.codadocode.codadocore.core.BaseSingleton;
 import br.com.codadocode.codadocore.core.CodadoLog;
+import br.com.codadocode.codadocore.core.Vector3;
+import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
 import org.bukkit.entity.Player;
 import java.util.*;
 
-public class AreaManager extends BaseSingleton {
+public class AreaManager {
+    private static AreaManager instance;
     private CodadoLog log;
     private Map<String, AreaData> areas;
     private Map<Player, AreaPlayer> players;
 
     public AreaManager()   {
-        super();
+        if (instance == null) instance = this;
+
         this.log = new CodadoLog("AreaManager");
         this.areas = new HashMap<String, AreaData>();
         this.players = new HashMap<>();
+    }
+
+    public static AreaManager getInstance()   {
+        return instance;
     }
 
     public boolean registerPlayerOnManager(Player player)   {
@@ -50,7 +57,7 @@ public class AreaManager extends BaseSingleton {
         areaPlayer.setActualRegion(null);
     }
 
-    private Optional<AreaPlayer> getAreaPlayer(Player player)   {
+    public Optional<AreaPlayer> getAreaPlayer(Player player)   {
         if (!this.players.containsKey(player)) return Optional.empty();
 
         return Optional.of(this.players.get(player));
@@ -73,5 +80,21 @@ public class AreaManager extends BaseSingleton {
         this.areas.remove(areaName);
         this.log.showInfo("Area '" + areaData.getAreaName() + "' foi removida com sucesso!");
         return true;
+    }
+
+    public Optional<AreaData> getAreaByName(String areaName)   {
+        if (!this.areas.containsKey(areaName)) return Optional.empty();
+
+        return Optional.of(this.areas.get(areaName));
+    }
+
+    public Optional<AreaData> checkVector3InsideArea(Vector3 position)   {
+        for (AreaData areaData : this.areas.values())   {
+            if (!areaData.getAreaSize().isInside(position)) continue;
+
+            return Optional.of(areaData);
+        }
+
+        return Optional.empty();
     }
 }

@@ -1,19 +1,27 @@
 package br.com.codadocode.codadocore.area.event;
-
+import br.com.codadocode.codadocore.area.AREA_FLAG;
+import br.com.codadocode.codadocore.area.AreaData;
 import br.com.codadocode.codadocore.area.AreaManager;
+import br.com.codadocode.codadocore.area.AreaPlayer;
+import br.com.codadocode.codadocore.core.ConvertUtility;
+import br.com.codadocode.codadocore.core.Vector3;
 import br.com.codadocode.codadocore.hidename.NametagManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.block.BlockBreakEvent;
+
+import java.util.Optional;
 
 public class AreaEvent implements Listener {
     @EventHandler
     public void onPlayerLogin(PlayerLoginEvent event)   {
         Player eventPlayer = event.getPlayer();
-        AreaManager areaManager = AreaManager.getInstance().cast();
+        AreaManager areaManager = (AreaManager)AreaManager.getInstance();
         boolean success = areaManager.registerPlayerOnManager(eventPlayer);
         if (success) Bukkit.getLogger().info("Jogador '" + eventPlayer.getName() + "' foi registrado com sucesso no AreaManager!");
     }
@@ -22,8 +30,40 @@ public class AreaEvent implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event)   {
         Player eventPlayer = event.getPlayer();
         NametagManager.instance.unhidePlayerName(eventPlayer);
-        AreaManager areaManager = AreaManager.getInstance().cast();
+        AreaManager areaManager = (AreaManager)AreaManager.getInstance();
         boolean success = areaManager.unRegisterPlayerOnManager(eventPlayer);
         if (success) Bukkit.getLogger().info("Jogador '" + eventPlayer.getName() + "' foi removido com sucesso do AreaManager!");
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event)   {
+        Player player = event.getPlayer();
+        Vector3 blockPosition = ConvertUtility.locationToVector3(event.getBlock().getLocation());
+        AreaManager manager = AreaManager.getInstance();
+        Optional<AreaData> optInteractionAreaData = manager.checkVector3InsideArea(blockPosition);
+
+        if (optInteractionAreaData.isEmpty()) return;
+        AreaData interactionAreaData = optInteractionAreaData.get();
+
+        if (interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
+
+        boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.BREAK);
+        event.setCancelled(!flagValue);
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event)   {
+        Player player = event.getPlayer();
+        Vector3 blockPosition = ConvertUtility.locationToVector3(event.getBlock().getLocation());
+        AreaManager manager = AreaManager.getInstance();
+        Optional<AreaData> optInteractionAreaData = manager.checkVector3InsideArea(blockPosition);
+
+        if (optInteractionAreaData.isEmpty()) return;
+        AreaData interactionAreaData = optInteractionAreaData.get();
+
+        if (interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
+
+        boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.BREAK);
+        event.setCancelled(!flagValue);
     }
 }

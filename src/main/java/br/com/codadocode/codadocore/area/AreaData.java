@@ -19,7 +19,7 @@ public class AreaData {
         this.areaName = areaName;
         this.areaSize = areaSize;
         this.owner = owner;
-        this.log = new CodadoLog(this.areaName);
+        this.log = new CodadoLog("Area-" + this.areaName);
         this.flags = AreaFlagBuilder.buildDefaultFlags();
         this.members = new ArrayList<>();
         this.insidePlayers = new ArrayList<>();
@@ -78,5 +78,25 @@ public class AreaData {
         if (!this.members.equals(player)) return false;
 
         return true;
+    }
+
+    public AreaSize getAreaSize()   {
+        return this.areaSize;
+    }
+
+    public boolean getFlagValue(AREA_FLAG areaFlag)   {
+        return this.flags.get(areaFlag);
+    }
+
+    public boolean setFlagValue(String flagName, boolean flagValue)   {
+        if (!this.flags.containsKey(AREA_FLAG.valueOf(flagName))) return false;
+
+        this.flags.replace(AREA_FLAG.valueOf(flagName), flagValue);
+        return true;
+    }
+
+    public void setOwner(Player player)   {
+        this.owner = player;
+        this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
     }
 }

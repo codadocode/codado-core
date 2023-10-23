@@ -23,7 +23,7 @@ public class SetSpawnCommand implements CommandExecutor {
             }
 
             World actualWorld = player.getWorld();
-            WorldSpawnManager worldSpawnManager = WorldSpawnManager.getInstance().cast();
+            WorldSpawnManager worldSpawnManager = WorldSpawnManager.getInstance();
             worldSpawnManager.saveSpawn(actualWorld, playerLocation, spawnName);
             Bukkit.getServer().getLogger().info("Spawn do mundo salvo.");
         }

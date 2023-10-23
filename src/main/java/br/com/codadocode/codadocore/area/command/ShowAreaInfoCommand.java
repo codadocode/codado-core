@@ -21,7 +21,7 @@ public class ShowAreaInfoCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player)   {
             Player player = (Player)commandSender;
-            AreaManager manager = AreaManager.getInstance().cast();
+            AreaManager manager = (AreaManager)AreaManager.getInstance();
         }
 
         return false;
