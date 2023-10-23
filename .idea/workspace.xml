@@ -6,18 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/BaseSingleton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SetSpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SpawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,22 +92,11 @@
       <workItem from="1697775274912" duration="1059000" />
       <workItem from="1697946563395" duration="4960000" />
       <workItem from="1697993642649" duration="13764000" />
-      <workItem from="1698023169127" duration="9963000" />
+      <workItem from="1698023169127" duration="10316000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -9,16 +9,16 @@ import java.util.*;
 public class AreaData {
     private CodadoLog log;
     private String areaName;
-    private Player owner;
-    private List<Player> members;
-    private List<Player> insidePlayers;
+    private String owner;
+    private List<String> members;
+    private List<String> insidePlayers;
     private Map<AREA_FLAG, Boolean> flags;
     private AreaSize areaSize;
 
     public AreaData(String areaName, AreaSize areaSize, Player owner)   {
         this.areaName = areaName;
         this.areaSize = areaSize;
-        this.owner = owner;
+        this.owner = owner.getName();
         this.log = new CodadoLog("Area-" + this.areaName);
         this.flags = AreaFlagBuilder.buildDefaultFlags();
         this.members = new ArrayList<>();
@@ -39,7 +39,7 @@ public class AreaData {
     private boolean addPlayerInside(Player player)   {
         if (this.insidePlayers.contains(player)) return false;
 
-        this.insidePlayers.add(player);
+        this.insidePlayers.add(player.getName());
         return true;
     }
 
@@ -53,7 +53,7 @@ public class AreaData {
     public boolean addMember(Player sender, Player playerToAdd)   {
         if (this.members.contains(playerToAdd) || !sender.equals(this.owner)) return false;
 
-        this.members.add(playerToAdd);
+        this.members.add(playerToAdd.getName());
         return true;
     }
 
@@ -69,13 +69,13 @@ public class AreaData {
     }
 
     public boolean isOwner(Player player)   {
-        if (!this.owner.equals(player)) return false;
+        if (!this.owner.equals(player.getName())) return false;
 
         return true;
     }
 
     public boolean isMember(Player player)   {
-        if (!this.members.equals(player)) return false;
+        if (!this.members.equals(player.getName())) return false;
 
         return true;
     }
@@ -96,7 +96,7 @@ public class AreaData {
     }
 
     public void setOwner(Player player)   {
-        this.owner = player;
+        this.owner = player.getName();
         this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
     }
 }
