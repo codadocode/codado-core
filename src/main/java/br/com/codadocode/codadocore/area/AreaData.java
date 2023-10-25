@@ -99,4 +99,8 @@ public class AreaData {
         this.owner = player.getName();
         this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
     }
+
+    public String getOwner()   {
+        return this.owner;
+    }
 }

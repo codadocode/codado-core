@@ -1,6 +1,7 @@
 package br.com.codadocode.codadocore;
 
 import br.com.codadocode.codadocore.area.AreaManager;
+import br.com.codadocode.codadocore.area.command.AddAreaMemberCommand;
 import br.com.codadocode.codadocore.area.command.CreateAreaCommand;
 import br.com.codadocode.codadocore.area.command.SetAreaOwnerCommand;
 import br.com.codadocode.codadocore.area.command.ShowAreaInfoCommand;
@@ -82,6 +83,8 @@ public class CodadoCore extends JavaPlugin {
         this.getCommand("areacreate").setExecutor(new CreateAreaCommand());
         this.getCommand("areainfo").setExecutor(new ShowAreaInfoCommand());
         this.getCommand("areasetowner").setExecutor(new SetAreaOwnerCommand());
+        this.getCommand("areamemberadd").setExecutor(new AddAreaMemberCommand());
+        this.getCommand("areamemberdel").setExecutor(new AddAreaMemberCommand());
     }
 
     private void loadData() throws FileNotFoundException {

@@ -27,7 +27,7 @@ public class SetAreaOwnerCommand implements CommandExecutor {
             String areaName = strings[0];
             String playerName = strings[1];
 
-            AreaManager areaManager = (AreaManager)AreaManager.getInstance();
+            AreaManager areaManager = AreaManager.getInstance();
             Optional<AreaData> optAreaData = areaManager.getAreaByName(areaName);
             if (optAreaData.isEmpty()){
                 //MESSAGE

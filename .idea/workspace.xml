@@ -6,16 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/JsonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/JsonManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/Vector3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/Vector3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/WorldSpawnManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SetSpawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/worldspawn/command/SetSpawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaOwnerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaOwnerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +110,7 @@
       <workItem from="1698034643690" duration="2542000" />
       <workItem from="1698088667839" duration="787000" />
       <workItem from="1698089469792" duration="2276000" />
-      <workItem from="1698190518621" duration="5725000" />
+      <workItem from="1698190518621" duration="14202000" />
     </task>
     <servers />
   </component>

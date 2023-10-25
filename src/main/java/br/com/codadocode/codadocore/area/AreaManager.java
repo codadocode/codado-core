@@ -61,8 +61,8 @@ public class AreaManager {
             if (optInsideArea.isEmpty()) continue;
 
             AreaData insideArea = optInsideArea.get();
+
             areaPlayer.setActualRegion(insideArea);
-            this.log.showInfo(areaPlayer.getPlayer().getName() + " esta dentro da area '" + insideArea.getAreaName() + "'");
             return;
         }
 

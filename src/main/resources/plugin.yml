@@ -1,25 +1,41 @@
   name: CodadoCore
   main: br.com.codadocode.codadocore.CodadoCore
   version: 0.1
-  api-version: 1.19
+  api-version: 1.20
+  author: CodadoCode
   commands:
     setspawn:
       description: Set world spawn origin point.
       usage: /setspawn
       permission: br.com.codadocode.codadocore.setspawn
+      permission-message: Você nao tem permissao para usar esse comando!
     spawn:
       description: Teleport to spawn point
       usage: /spawn
       permission: br.com.codadocode.codadocore.spawn
+      permission-message: Você nao tem permissao para usar esse comando!
     areacreate:
       description: Create new area
-      usage: /areacreate
+      usage: /areacreate [area-name] [horizontal-size] [vertical-size]
       permission: br.com.codadocode.codadocore.areacreate
+      permission-message: Você nao tem permissao para usar esse comando!
     areainfo:
-      description: Show are info
+      description: Show your actual area information
       usage: /areainfo
       permission: br.com.codadocode.codadocore.areainfo
+      permission-message: Você nao tem permissao para usar esse comando!
     areasetowner:
       description: Set owner area
-      usage: /areasetowner
+      usage: /areasetowner [area-name] [player]
       permission: br.com.codadocode.codadocore.areasetowner
+      permission-message: Você nao tem permissao para usar esse comando!
+    areamemberadd:
+      description: Add area member
+      usage: /areamemberadd [area-name] [player]
+      permission: br.com.codadocode.codadocore.areamemberadd
+      permission-message: Você nao tem permissao para usar esse comando!
+    areamemberdel:
+      description: Remove area member
+      usage: /areamemberdel [area-name] [player]
+      permission: br.com.codadocode.codadocore.areamemberdel
+      permission-message: Você nao tem permissao para usar esse comando!
