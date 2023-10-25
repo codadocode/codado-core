@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,13 @@ public class CodadoCore extends JavaPlugin {
         buildManagers();
         registerEvents();
         registerCommands();
-        loadData();
+
+        try {
+            loadData();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         initializeRunnables();
         this.getLogger().info("Finished!");
     }
@@ -77,14 +84,15 @@ public class CodadoCore extends JavaPlugin {
         this.getCommand("areasetowner").setExecutor(new SetAreaOwnerCommand());
     }
 
-    private void loadData()   {
+    private void loadData() throws FileNotFoundException {
         this.worldSpawnManager.loadAllSpawnData();
+        this.areaManager.loadAllAreaData();
     }
 
     private void buildManagers()   {
         this.nametagManager = new NametagManager();
         this.worldSpawnManager = new WorldSpawnManager(this.dataFolder, "worldspawns");
-        this.areaManager = new AreaManager();
+        this.areaManager = new AreaManager(this.dataFolder, "areas");
     }
 
     private void registerEvents()   {

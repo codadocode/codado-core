@@ -2,7 +2,9 @@ package br.com.codadocode.codadocore.worldspawn;
 
 import br.com.codadocode.codadocore.core.Vector3;
 
-public class WorldSpawnData {
+import java.io.Serializable;
+
+public class WorldSpawnData   {
     private String worldName;
     private Vector3 spawnPosition;
     private String spawnName;

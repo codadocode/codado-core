@@ -1,11 +1,8 @@
 package br.com.codadocode.codadocore.core;
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,40 +11,30 @@ import java.util.Optional;
 public class JsonManager {
     private DataFolder dataFolder;
     private String fileExtension = ".json";
+
     Gson gson;
 
     public JsonManager(DataFolder dataFolder)   {
         this.dataFolder = dataFolder;
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
-    public boolean saveToFile(String fileName, Object sourceObj, Type typeOfSource)   {
-        String jsonObject = this.gson.toJson(sourceObj, typeOfSource);
-        try   {
-            FileWriter fileWriter = new FileWriter(this.dataFolder.getSubFolderData().getAbsolutePath() + "/" + fileName + this.fileExtension);
-            fileWriter.write(jsonObject);
-            fileWriter.close();
-            return true;
-        }catch(Exception e)   {
-            e.printStackTrace();
-        }
-        return false;
+    public boolean saveToFile(String fileName, Object sourceObj) throws IOException {
+        File fileObject = new File(this.dataFolder.getSubFolderData(), fileName + fileExtension);
+        Writer writer = new FileWriter(fileObject);
+        this.gson.toJson(sourceObj, writer);
+        writer.close();
+
+        return true;
     }
 
-    private Optional<Object> loadFile(File file, Type typeOfSource)   {
-        try   {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            if (reader == null)   return Optional.empty();
-            Object object = this.gson.toJson(reader, typeOfSource);
-            return Optional.of(typeOfSource.getClass().cast(object));
-
-        }catch (Exception e)   {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+    private Optional<Object> loadFile(File file, Type typeOfSource) throws FileNotFoundException {
+        Reader reader = new FileReader(file);
+        Object genericObject = gson.fromJson(reader,  typeOfSource);
+        return Optional.of(genericObject);
     }
 
-    public Optional<List<Object>> loadAllFiles(Type typeOfSource)   {
+    public Optional<List<Object>> loadAllFiles(Type typeOfSource) throws FileNotFoundException {
         File[] folderFiles = this.dataFolder.getSubFolderData().listFiles();
         if (folderFiles.length == 0) return Optional.empty();
         List<Object> loadedObjectList = new ArrayList<>();

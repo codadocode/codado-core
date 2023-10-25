@@ -2,8 +2,8 @@ package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.ConvertUtility;
+import com.google.gson.annotations.Expose;
 import org.bukkit.entity.Player;
-
 import java.util.*;
 
 public class AreaData {

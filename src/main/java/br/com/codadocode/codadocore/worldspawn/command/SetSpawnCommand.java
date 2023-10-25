@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 public class SetSpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -24,8 +26,12 @@ public class SetSpawnCommand implements CommandExecutor {
 
             World actualWorld = player.getWorld();
             WorldSpawnManager worldSpawnManager = WorldSpawnManager.getInstance();
-            worldSpawnManager.saveSpawn(actualWorld, playerLocation, spawnName);
-            Bukkit.getServer().getLogger().info("Spawn do mundo salvo.");
+            try {
+                worldSpawnManager.saveSpawn(actualWorld, playerLocation, spawnName);
+                Bukkit.getServer().getLogger().info("Spawn do mundo salvo.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return true;
     }

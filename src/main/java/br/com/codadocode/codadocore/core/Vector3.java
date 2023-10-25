@@ -1,6 +1,8 @@
 package br.com.codadocode.codadocore.core;
 
-public class Vector3 {
+import java.io.Serializable;
+
+public class Vector3   {
     private double x;
     private double y;
     private double z;

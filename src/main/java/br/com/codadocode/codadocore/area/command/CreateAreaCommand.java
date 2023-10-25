@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class CreateAreaCommand implements CommandExecutor {
@@ -28,9 +29,12 @@ public class CreateAreaCommand implements CommandExecutor {
             AreaSize areaSize = new AreaSize(areaHorizontalSize, areaVerticalSize, playerPosition);
             AreaData newAreaData = new AreaData(areaName, areaSize, player);
 
-            AreaManager areaManager = (AreaManager)AreaManager.getInstance();
-            areaManager.createArea(player, newAreaData);
-
+            AreaManager areaManager = AreaManager.getInstance();
+            try {
+                areaManager.createArea(player, newAreaData);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             return true;
         }
 
