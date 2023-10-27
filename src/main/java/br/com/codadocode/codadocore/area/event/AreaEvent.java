@@ -93,7 +93,7 @@ public class AreaEvent implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event)   {
-        if (event.getDamager() instanceof  Player || event.getEntity() instanceof Player)   {
+        if (event.getDamager() instanceof  Player && event.getEntity() instanceof Player)   {
             Player damagerPlayer = (Player)event.getDamager();
             Player victimPlayer = (Player)event.getEntity();
 

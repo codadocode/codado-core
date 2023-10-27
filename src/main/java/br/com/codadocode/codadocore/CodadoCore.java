@@ -4,16 +4,14 @@ import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.command.*;
 import br.com.codadocode.codadocore.area.event.AreaEvent;
 import br.com.codadocode.codadocore.core.DataFolder;
+import br.com.codadocode.codadocore.custommobs.MobLifeEvent;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
 import br.com.codadocode.codadocore.hidename.NametagManager;
 import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
 import br.com.codadocode.codadocore.worldspawn.command.SetSpawnCommand;
 import br.com.codadocode.codadocore.worldspawn.command.SpawnCommand;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -102,5 +100,6 @@ public class CodadoCore extends JavaPlugin {
     private void registerEvents()   {
         this.getServer().getPluginManager().registerEvents(new NametagEvent(), this);
         this.getServer().getPluginManager().registerEvents(new AreaEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new MobLifeEvent(), this);
     }
 }
