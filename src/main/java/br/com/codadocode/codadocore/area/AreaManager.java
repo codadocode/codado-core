@@ -126,4 +126,8 @@ public class AreaManager {
             Bukkit.getServer().getLogger().info("Area data empty!");
         }
     }
+
+    public JsonManager getJsonManager()   {
+        return this.jsonManager;
+    }
 }

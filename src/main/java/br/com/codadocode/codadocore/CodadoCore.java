@@ -1,10 +1,7 @@
 package br.com.codadocode.codadocore;
 
 import br.com.codadocode.codadocore.area.AreaManager;
-import br.com.codadocode.codadocore.area.command.AddAreaMemberCommand;
-import br.com.codadocode.codadocore.area.command.CreateAreaCommand;
-import br.com.codadocode.codadocore.area.command.SetAreaOwnerCommand;
-import br.com.codadocode.codadocore.area.command.ShowAreaInfoCommand;
+import br.com.codadocode.codadocore.area.command.*;
 import br.com.codadocode.codadocore.area.event.AreaEvent;
 import br.com.codadocode.codadocore.core.DataFolder;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
@@ -13,7 +10,10 @@ import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
 import br.com.codadocode.codadocore.worldspawn.command.SetSpawnCommand;
 import br.com.codadocode.codadocore.worldspawn.command.SpawnCommand;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.Location;
+import org.bukkit.entity.*;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -85,6 +85,7 @@ public class CodadoCore extends JavaPlugin {
         this.getCommand("areasetowner").setExecutor(new SetAreaOwnerCommand());
         this.getCommand("areamemberadd").setExecutor(new AddAreaMemberCommand());
         this.getCommand("areamemberdel").setExecutor(new AddAreaMemberCommand());
+        this.getCommand("areasetflag").setExecutor(new SetAreaFlagCommand());
     }
 
     private void loadData() throws FileNotFoundException {

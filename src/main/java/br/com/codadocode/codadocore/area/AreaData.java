@@ -54,6 +54,13 @@ public class AreaData {
         if (this.members.contains(playerToAdd) || !sender.equals(this.owner)) return false;
 
         this.members.add(playerToAdd.getName());
+
+        try   {
+            AreaManager.getInstance().getJsonManager().saveToFile(this.areaName, this);
+        }catch(Exception e)   {
+
+        }
+
         return true;
     }
 
@@ -61,6 +68,13 @@ public class AreaData {
         if (!this.members.contains(playerToRemove) || !sender.equals(this.owner)) return false;
 
         this.members.remove(playerToRemove);
+
+        try   {
+            AreaManager.getInstance().getJsonManager().saveToFile(this.areaName, this);
+        }catch(Exception e)   {
+
+        }
+
         return true;
     }
 
@@ -92,11 +106,25 @@ public class AreaData {
         if (!this.flags.containsKey(AREA_FLAG.valueOf(flagName))) return false;
 
         this.flags.replace(AREA_FLAG.valueOf(flagName), flagValue);
+
+        try   {
+            AreaManager.getInstance().getJsonManager().saveToFile(this.areaName, this);
+        }catch(Exception e)   {
+
+        }
+
         return true;
     }
 
     public void setOwner(Player player)   {
         this.owner = player.getName();
+
+        try   {
+            AreaManager.getInstance().getJsonManager().saveToFile(this.areaName, this);
+        }catch(Exception e)   {
+
+        }
+
         this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
     }
 

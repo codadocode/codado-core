@@ -39,3 +39,8 @@
       usage: /areamemberdel [area-name] [player]
       permission: br.com.codadocode.codadocore.areamemberdel
       permission-message: Você nao tem permissao para usar esse comando!
+    areasetflag:
+      description: Set area flag value
+      usage: /areasetflag [area-name] [flagname] [value(true-false)]
+      permission: br.com.codadocode.codadocore.areasetflag
+      permission-message: Você nao tem permissao para usar esse comando!

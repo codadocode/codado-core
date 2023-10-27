@@ -7,12 +7,15 @@ import br.com.codadocode.codadocore.core.ConvertUtility;
 import br.com.codadocode.codadocore.core.Vector3;
 import br.com.codadocode.codadocore.hidename.NametagManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -88,6 +91,7 @@ public class AreaEvent implements Listener {
         event.setCancelled(!flagValue);
     }
 
+    @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event)   {
         if (event.getDamager() instanceof  Player || event.getEntity() instanceof Player)   {
             Player damagerPlayer = (Player)event.getDamager();
@@ -106,6 +110,8 @@ public class AreaEvent implements Listener {
 
                 boolean damagerFlagValue = damagerAreaData.getFlagValue(AREA_FLAG.PVP);
                 event.setCancelled(!damagerFlagValue);
+
+                return;
             }
 
             Optional<AreaData> optVictimAreaData = manager.checkVector3InsideArea(victimPosition);
@@ -114,7 +120,24 @@ public class AreaEvent implements Listener {
 
                 boolean victimFlagValue = victimAreaData.getFlagValue(AREA_FLAG.PVP);
                 event.setCancelled(!victimFlagValue);
+
+                return;
             }
         }
+    }
+
+    @EventHandler
+    public void onEntityExplosion(EntityExplodeEvent event)   {
+        Entity entity = event.getEntity();
+        Vector3 entityPosition = ConvertUtility.locationToVector3(entity.getLocation());
+        AreaManager manager = AreaManager.getInstance();
+
+        Optional<AreaData> optAreaData = manager.checkVector3InsideArea(entityPosition);
+        if (optAreaData.isEmpty()) return;
+
+        AreaData areaData = optAreaData.get();
+        boolean flagValue = areaData.getFlagValue(AREA_FLAG.MONSTER_EXPLOSION);
+
+        if (!flagValue) event.setCancelled(true);
     }
 }
