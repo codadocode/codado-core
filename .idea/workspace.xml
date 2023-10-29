@@ -7,7 +7,8 @@
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/custommobs/MobLifeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/custommobs/event/MobLifeEvent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +112,8 @@
       <workItem from="1698359895186" duration="7430000" />
       <workItem from="1698375080870" duration="6939000" />
       <workItem from="1698539002998" duration="11290000" />
+      <workItem from="1698586583588" duration="629000" />
+      <workItem from="1698598681277" duration="3272000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-package br.com.codadocode.codadocore.custommobs;
+package br.com.codadocode.codadocore.custommobs.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

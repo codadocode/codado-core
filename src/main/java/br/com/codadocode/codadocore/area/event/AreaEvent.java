@@ -51,9 +51,9 @@ public class AreaEvent implements Listener {
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
 
-        if (interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
-
         boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.BREAK);
+        if (flagValue || interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
+
         event.setCancelled(!flagValue);
     }
 
@@ -67,9 +67,9 @@ public class AreaEvent implements Listener {
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
 
-        if (interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
+        boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.CAN_PLACE);
+        if (flagValue || interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
 
-        boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.BREAK);
         event.setCancelled(!flagValue);
     }
 
@@ -85,9 +85,9 @@ public class AreaEvent implements Listener {
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
 
-        if (interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
-
         boolean flagValue = interactionAreaData.getFlagValue(AREA_FLAG.INTERACT);
+        if (flagValue || interactionAreaData.isOwner(player) || interactionAreaData.isMember(player) || player.hasPermission("br.com.codadocode.codadocore.area.admin")) return;
+
         event.setCancelled(!flagValue);
     }
 

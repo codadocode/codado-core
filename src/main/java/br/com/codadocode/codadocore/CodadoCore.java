@@ -4,7 +4,7 @@ import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.command.*;
 import br.com.codadocode.codadocore.area.event.AreaEvent;
 import br.com.codadocode.codadocore.core.DataFolder;
-import br.com.codadocode.codadocore.custommobs.MobLifeEvent;
+import br.com.codadocode.codadocore.custommobs.event.MobLifeEvent;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
 import br.com.codadocode.codadocore.hidename.NametagManager;
 import br.com.codadocode.codadocore.waypoint.command.WaypointCreateCommand;
