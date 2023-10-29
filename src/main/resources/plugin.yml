@@ -44,3 +44,8 @@
       usage: /areasetflag [area-name] [flagname] [value(true-false)]
       permission: br.com.codadocode.codadocore.areasetflag
       permission-message: Você nao tem permissao para usar esse comando!
+    waypointcreate:
+      description: Create new waypoint
+      usage: /waypointcreate [worldname] [xPos] [yPos] [zPos] [waypoint-name]
+      permission: br.com.codadocode.codadocore.waypointcreate
+      permission-message: Você nao tem permissao para usar esse comando!

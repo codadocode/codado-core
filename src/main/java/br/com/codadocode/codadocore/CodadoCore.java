@@ -7,6 +7,8 @@ import br.com.codadocode.codadocore.core.DataFolder;
 import br.com.codadocode.codadocore.custommobs.MobLifeEvent;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
 import br.com.codadocode.codadocore.hidename.NametagManager;
+import br.com.codadocode.codadocore.waypoint.command.WaypointCreateCommand;
+import br.com.codadocode.codadocore.waypoint.event.WaypointEvent;
 import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
 import br.com.codadocode.codadocore.worldspawn.command.SetSpawnCommand;
 import br.com.codadocode.codadocore.worldspawn.command.SpawnCommand;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodadoCore extends JavaPlugin {
+    private static CodadoCore instance;
     private File dataFolder;
     private NametagManager nametagManager;
     private WorldSpawnManager worldSpawnManager;
@@ -50,6 +53,7 @@ public class CodadoCore extends JavaPlugin {
     }
 
     private void initialize()   {
+        instance = this;
         prepareDataFolder();
     }
 
@@ -84,6 +88,8 @@ public class CodadoCore extends JavaPlugin {
         this.getCommand("areamemberadd").setExecutor(new AddAreaMemberCommand());
         this.getCommand("areamemberdel").setExecutor(new AddAreaMemberCommand());
         this.getCommand("areasetflag").setExecutor(new SetAreaFlagCommand());
+
+        this.getCommand("waypointcreate").setExecutor(new WaypointCreateCommand());
     }
 
     private void loadData() throws FileNotFoundException {
@@ -101,5 +107,10 @@ public class CodadoCore extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new NametagEvent(), this);
         this.getServer().getPluginManager().registerEvents(new AreaEvent(), this);
         this.getServer().getPluginManager().registerEvents(new MobLifeEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new WaypointEvent(), this);
+    }
+
+    public static CodadoCore getInstance()   {
+        return instance;
     }
 }
