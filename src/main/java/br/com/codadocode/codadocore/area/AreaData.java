@@ -2,8 +2,10 @@ package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.ConvertUtility;
-import com.google.gson.annotations.Expose;
+import br.com.codadocode.codadocore.core.Vector3;
 import org.bukkit.entity.Player;
+
+import javax.xml.crypto.Data;
 import java.util.*;
 
 public class AreaData {
@@ -12,6 +14,7 @@ public class AreaData {
     private String owner;
     private List<String> members;
     private List<String> insidePlayers;
+    private Map<String ,AreaData> subAreas;
     private Map<AREA_FLAG, Boolean> flags;
     private AreaSize areaSize;
 
@@ -23,6 +26,7 @@ public class AreaData {
         this.flags = AreaFlagBuilder.buildDefaultFlags();
         this.members = new ArrayList<>();
         this.insidePlayers = new ArrayList<>();
+        this.subAreas = new HashMap<>();
     }
 
     public Optional<AreaData> checkPlayerInside(Player player)   {
@@ -40,6 +44,7 @@ public class AreaData {
         if (this.insidePlayers.contains(player)) return false;
 
         this.insidePlayers.add(player.getName());
+        player.sendMessage("Você entrou na região '" + this.getAreaName() + "', Dono: '" + this.getOwner() + "'.");
         return true;
     }
 
@@ -126,6 +131,22 @@ public class AreaData {
         }
 
         this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
+    }
+
+    public Optional<AreaData> isInside(Vector3 position)   {
+        boolean positionInside = getAreaSize().isInside(position);
+
+        if (!positionInside) return Optional.empty();
+
+        return Optional.of(this);
+    }
+
+    public boolean createSubArea(Player sender, AreaData areaData)   {
+        if (this.subAreas.containsKey(areaData.getAreaName())) return false;
+
+        this.subAreas.put(areaData.getAreaName(), areaData);
+
+        return true;
     }
 
     public String getOwner()   {

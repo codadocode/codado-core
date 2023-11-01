@@ -7,6 +7,7 @@ import br.com.codadocode.codadocore.core.DataFolder;
 import br.com.codadocode.codadocore.custommobs.event.MobLifeEvent;
 import br.com.codadocode.codadocore.hidename.NametagEvent;
 import br.com.codadocode.codadocore.hidename.NametagManager;
+import br.com.codadocode.codadocore.tools.event.BlockSelectEvent;
 import br.com.codadocode.codadocore.waypoint.command.WaypointCreateCommand;
 import br.com.codadocode.codadocore.waypoint.event.WaypointEvent;
 import br.com.codadocode.codadocore.worldspawn.WorldSpawnManager;
@@ -108,6 +109,7 @@ public class CodadoCore extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new AreaEvent(), this);
         this.getServer().getPluginManager().registerEvents(new MobLifeEvent(), this);
         this.getServer().getPluginManager().registerEvents(new WaypointEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockSelectEvent(), this);
     }
 
     public static CodadoCore getInstance()   {

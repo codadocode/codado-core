@@ -103,9 +103,11 @@ public class AreaManager {
 
     public Optional<AreaData> checkVector3InsideArea(Vector3 position)   {
         for (AreaData areaData : this.areas.values())   {
-            if (!areaData.getAreaSize().isInside(position)) continue;
+            Optional<AreaData> areaDataInside = areaData.isInside(position);
 
-            return Optional.of(areaData);
+            if (areaDataInside.isEmpty()) continue;
+
+            return Optional.of(areaDataInside.get());
         }
 
         return Optional.empty();

@@ -4,6 +4,7 @@ import br.com.codadocode.codadocore.area.AreaData;
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.AreaSize;
 import br.com.codadocode.codadocore.core.ConvertUtility;
+import br.com.codadocode.codadocore.core.PlayerUtility;
 import br.com.codadocode.codadocore.core.Vector3;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +13,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class CreateAreaCommand implements CommandExecutor {
@@ -21,12 +24,18 @@ public class CreateAreaCommand implements CommandExecutor {
             Player player = (Player)commandSender;
             Vector3 playerPosition = ConvertUtility.locationToVector3(player.getLocation());
 
-            if (strings.length != 3) return false;
+            if (strings.length != 1) return false;
 
             String areaName = strings[0];
-            int areaHorizontalSize = ConvertUtility.stringToInt(strings[1]);
-            int areaVerticalSize = ConvertUtility.stringToInt(strings[2]);
-            AreaSize areaSize = new AreaSize(areaHorizontalSize, areaVerticalSize, playerPosition);
+            Optional<List<Vector3>> optEntryPlayerSelectedBlocks = PlayerUtility.getPlayerSelectedBlocks(player);
+            if (optEntryPlayerSelectedBlocks.isEmpty())   {
+                //MESSAGE
+                return true;
+            }
+
+            List<Vector3> entryPlayerSelectedBlocks = optEntryPlayerSelectedBlocks.get();
+
+            AreaSize areaSize = new AreaSize(entryPlayerSelectedBlocks.get(0), entryPlayerSelectedBlocks.get(1));
             AreaData newAreaData = new AreaData(areaName, areaSize, player);
 
             AreaManager areaManager = AreaManager.getInstance();

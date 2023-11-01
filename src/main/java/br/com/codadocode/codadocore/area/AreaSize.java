@@ -1,38 +1,44 @@
 package br.com.codadocode.codadocore.area;
 
 import br.com.codadocode.codadocore.core.Vector3;
+import org.bukkit.Location;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AreaSize {
-    private int horizontalSize;
-    private int verticalSize;
-    private Vector3 center;
+    private Vector3 firstPosition;
+    private Vector3 secondPosition;
 
-    public AreaSize(int horizontalSize, int verticalSize, Vector3 center)   {
-        this.horizontalSize = horizontalSize;
-        this.verticalSize = verticalSize;
-        this.center = center;
+    public AreaSize(Vector3 firstPosition, Vector3 secondPosition)   {
+        this.firstPosition = firstPosition;
+        this.secondPosition = secondPosition;
     }
 
-    public int getHorizontalSize()   {
-        return this.horizontalSize;
+    public Vector3 getFirstPosition()   {
+        return this.firstPosition;
     }
 
-    public int getVerticalSize()   {
-        return this.verticalSize;
-    }
-
-    public Vector3 getCenter()   {
-        return this.center;
+    public Vector3 getSecondPosition()   {
+        return this.secondPosition;
     }
 
     public String getSizeInfo()   {
-        return "Centro:" + this.center + ", TamanhoHorizontal:" + this.horizontalSize + ", TamanhoVertical:" + this.verticalSize;
+        return "FirstPoint: " + this.firstPosition.toString() + ", SecondPoint: " + this.secondPosition.toString();
     }
 
     public boolean isInside(Vector3 position)   {
-        boolean insideX = position.getX() < this.center.getX() + this.horizontalSize && position.getX() > this.center.getX() - this.horizontalSize;
-        boolean insideZ = position.getZ() < this.center.getZ() + this.horizontalSize && position.getZ() > this.center.getZ() - this.horizontalSize;
-        boolean insideY = position.getY() < this.center.getY() + this.verticalSize && position.getY() > this.center.getY() - this.verticalSize;
+        List<Double> xPosList = Arrays.asList(this.firstPosition.getX(), this.secondPosition.getX());
+        List<Double> yPosList = Arrays.asList(this.firstPosition.getY(), this.secondPosition.getY());
+        List<Double> zPosList = Arrays.asList(this.firstPosition.getZ(), this.secondPosition.getZ());
+        xPosList.sort(Double::compare);
+        yPosList.sort(Double::compare);
+        zPosList.sort(Double::compare);
+
+        boolean insideX = (position.getX() >= xPosList.get(0) && position.getX() <= xPosList.get(1));
+        boolean insideY = (position.getY() >= yPosList.get(0) && position.getY() <= yPosList.get(1));
+        boolean insideZ = (position.getZ() >= zPosList.get(0) && position.getZ() <= zPosList.get(1));
 
         if (insideX && insideY && insideZ) return true;
         else return false;

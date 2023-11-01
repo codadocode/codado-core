@@ -8,6 +8,7 @@ import br.com.codadocode.codadocore.core.Vector3;
 import br.com.codadocode.codadocore.hidename.NametagManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -136,7 +137,13 @@ public class AreaEvent implements Listener {
         if (optAreaData.isEmpty()) return;
 
         AreaData areaData = optAreaData.get();
-        boolean flagValue = areaData.getFlagValue(AREA_FLAG.MONSTER_EXPLOSION);
+
+        Boolean flagValue = null;
+        if (!entity.getType().equals(EntityType.PRIMED_TNT))   {
+            flagValue = areaData.getFlagValue(AREA_FLAG.MONSTER_EXPLOSION);
+        }else   {
+            flagValue = areaData.getFlagValue(AREA_FLAG.TNT_EXPLOSION);
+        }
 
         if (!flagValue) event.setCancelled(true);
     }

@@ -7,8 +7,11 @@
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/CodadoCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaSize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/custommobs/MobLifeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/custommobs/event/MobLifeEvent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +116,11 @@
       <workItem from="1698375080870" duration="6939000" />
       <workItem from="1698539002998" duration="11290000" />
       <workItem from="1698586583588" duration="629000" />
-      <workItem from="1698598681277" duration="3272000" />
+      <workItem from="1698598681277" duration="5566000" />
+      <workItem from="1698622458739" duration="600000" />
+      <workItem from="1698635753653" duration="600000" />
+      <workItem from="1698710900080" duration="4945000" />
+      <workItem from="1698811619106" duration="5183000" />
     </task>
     <servers />
   </component>
@@ -122,5 +129,21 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="java:org.spigotmc:spigot-api" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/core/PlayerUtility.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaSize.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
