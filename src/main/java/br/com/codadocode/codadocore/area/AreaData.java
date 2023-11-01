@@ -6,6 +6,8 @@ import br.com.codadocode.codadocore.core.Vector3;
 import org.bukkit.entity.Player;
 
 import javax.xml.crypto.Data;
+import java.awt.geom.Area;
+import java.io.IOException;
 import java.util.*;
 
 public class AreaData {
@@ -134,18 +136,39 @@ public class AreaData {
     }
 
     public Optional<AreaData> isInside(Vector3 position)   {
-        boolean positionInside = getAreaSize().isInside(position);
+        Optional<AreaData> optInsideArea = isInsideSubAreas(position);
 
-        if (!positionInside) return Optional.empty();
+        if (optInsideArea.isEmpty())   {
+            boolean positionInside = getAreaSize().isInside(position);
 
-        return Optional.of(this);
+            if (positionInside) optInsideArea = Optional.of(this);
+        }
+
+        return optInsideArea;
     }
 
-    public boolean createSubArea(Player sender, AreaData areaData)   {
+    private Optional<AreaData> isInsideSubAreas(Vector3 position)   {
+        if (this.subAreas.size() == 0) return Optional.empty();
+
+        for (AreaData subArea : this.subAreas.values())   {
+            boolean insideSubArea = subArea.getAreaSize().isInside(position);
+
+            if (!insideSubArea) continue;
+
+            return Optional.of(subArea);
+        }
+
+        return Optional.empty();
+    }
+
+    public boolean createSubArea(Player sender, AreaData areaData) throws IOException {
         if (this.subAreas.containsKey(areaData.getAreaName())) return false;
 
         this.subAreas.put(areaData.getAreaName(), areaData);
 
+        AreaManager manager = AreaManager.getInstance();
+        manager.getJsonManager().saveToFile(this.getAreaName(), this);
+        this.log.showInfo("SubArea '" + areaData.getAreaName() + "' foi criada com sucesso na area principal '" + this.areaName + "'.");
         return true;
     }
 

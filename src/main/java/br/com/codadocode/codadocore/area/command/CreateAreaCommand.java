@@ -27,24 +27,53 @@ public class CreateAreaCommand implements CommandExecutor {
             if (strings.length != 1) return false;
 
             String areaName = strings[0];
-            Optional<List<Vector3>> optEntryPlayerSelectedBlocks = PlayerUtility.getPlayerSelectedBlocks(player);
-            if (optEntryPlayerSelectedBlocks.isEmpty())   {
+            Optional<List<Vector3>> optPlayerSelectedBlocks = PlayerUtility.getPlayerSelectedBlocks(player);
+            if (optPlayerSelectedBlocks.isEmpty())   {
                 //MESSAGE
                 return true;
             }
 
-            List<Vector3> entryPlayerSelectedBlocks = optEntryPlayerSelectedBlocks.get();
+            AreaManager areaManager = AreaManager.getInstance();
+            List<Vector3> playerSelectedBlocks = optPlayerSelectedBlocks.get();
 
-            AreaSize areaSize = new AreaSize(entryPlayerSelectedBlocks.get(0), entryPlayerSelectedBlocks.get(1));
+            Optional<AreaData> optFirstArea = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(0));
+            Optional<AreaData> optSecondArea = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(1));
+
+            AreaSize areaSize = new AreaSize(playerSelectedBlocks.get(0), playerSelectedBlocks.get(1));
             AreaData newAreaData = new AreaData(areaName, areaSize, player);
 
-            AreaManager areaManager = AreaManager.getInstance();
-            try {
-                areaManager.createArea(player, newAreaData);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if ((optFirstArea.isPresent() && optSecondArea.isEmpty()) || (optFirstArea.isEmpty() && optSecondArea.isPresent()))   {
+                //VAI SE TRATAR GAROTAAA
+
+                return true;
             }
-            return true;
+
+            if (optFirstArea.isEmpty() && optSecondArea.isEmpty())   {
+                try {
+                    areaManager.createArea(player, newAreaData);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                return true;
+            }
+
+            if (optFirstArea.isPresent() && optSecondArea.isPresent())   {
+                AreaData firstAreaData = optFirstArea.get();
+                AreaData secondAreaData = optSecondArea.get();
+
+                if (!firstAreaData.equals(secondAreaData)) {
+                    //ERRO AREAS DIFERENTES
+                    return true;
+                }
+
+                try {
+                    firstAreaData.createSubArea(player, newAreaData);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
         }
 
         return false;
