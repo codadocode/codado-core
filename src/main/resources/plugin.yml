@@ -1,6 +1,6 @@
   name: CodadoCore
   main: br.com.codadocode.codadocore.CodadoCore
-  version: 0.1
+  version: 1.2
   api-version: 1.20
   author: CodadoCode
   commands:
@@ -16,7 +16,7 @@
       permission-message: Você nao tem permissao para usar esse comando!
     areacreate:
       description: Create new area
-      usage: /areacreate [area-name] [horizontal-size] [vertical-size]
+      usage: /areacreate [area-name]
       permission: br.com.codadocode.codadocore.areacreate
       permission-message: Você nao tem permissao para usar esse comando!
     areainfo:
@@ -26,22 +26,22 @@
       permission-message: Você nao tem permissao para usar esse comando!
     areasetowner:
       description: Set owner area
-      usage: /areasetowner [area-name] [player]
+      usage: /areasetowner [player]
       permission: br.com.codadocode.codadocore.areasetowner
       permission-message: Você nao tem permissao para usar esse comando!
     areamemberadd:
       description: Add area member
-      usage: /areamemberadd [area-name] [player]
+      usage: /areamemberadd [player]
       permission: br.com.codadocode.codadocore.areamemberadd
       permission-message: Você nao tem permissao para usar esse comando!
     areamemberdel:
       description: Remove area member
-      usage: /areamemberdel [area-name] [player]
+      usage: /areamemberdel [player]
       permission: br.com.codadocode.codadocore.areamemberdel
       permission-message: Você nao tem permissao para usar esse comando!
     areasetflag:
       description: Set area flag value
-      usage: /areasetflag [area-name] [flagname] [value(true-false)]
+      usage: /areasetflag [flagname] [value(true-false)]
       permission: br.com.codadocode.codadocore.areasetflag
       permission-message: Você nao tem permissao para usar esse comando!
     waypointcreate:

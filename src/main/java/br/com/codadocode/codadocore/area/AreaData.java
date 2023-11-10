@@ -1,5 +1,6 @@
 package br.com.codadocode.codadocore.area;
 
+import br.com.codadocode.codadocore.area.event.AREA_TYPE;
 import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.ConvertUtility;
 import br.com.codadocode.codadocore.core.Vector3;
@@ -17,10 +18,11 @@ public class AreaData {
     private List<String> members;
     private List<String> insidePlayers;
     private Map<String ,AreaData> subAreas;
+    private final boolean isSubArea;
     private Map<AREA_FLAG, Boolean> flags;
     private AreaSize areaSize;
 
-    public AreaData(String areaName, AreaSize areaSize, Player owner)   {
+    public AreaData(String areaName, AreaSize areaSize, Player owner, boolean isSubArea)   {
         this.areaName = areaName;
         this.areaSize = areaSize;
         this.owner = owner.getName();
@@ -29,6 +31,7 @@ public class AreaData {
         this.members = new ArrayList<>();
         this.insidePlayers = new ArrayList<>();
         this.subAreas = new HashMap<>();
+        this.isSubArea = isSubArea;
     }
 
     public Optional<AreaData> checkPlayerInside(Player player)   {
@@ -39,11 +42,12 @@ public class AreaData {
             return Optional.of(this);
         }
 
+        removePlayerInside(player);
         return Optional.empty();
     }
 
     private boolean addPlayerInside(Player player)   {
-        if (this.insidePlayers.contains(player)) return false;
+        if (this.insidePlayers.contains(player.getName())) return false;
 
         this.insidePlayers.add(player.getName());
         player.sendMessage("Você entrou na região '" + this.getAreaName() + "', Dono: '" + this.getOwner() + "'.");
@@ -51,9 +55,10 @@ public class AreaData {
     }
 
     private boolean removePlayerInside(Player player)   {
-        if (!this.insidePlayers.contains(player)) return false;
+        if (!this.insidePlayers.contains(player.getName())) return false;
 
-        this.insidePlayers.remove(player);
+        this.insidePlayers.remove(player.getName());
+        player.sendMessage("Você saiu da região '" + this.getAreaName() + "', Dono: '" + this.getOwner() + "'.");
         return true;
     }
 
@@ -135,16 +140,13 @@ public class AreaData {
         this.log.showInfo("Player '" + player.getName() + "' foi definido como dono da região");
     }
 
-    public Optional<AreaData> isInside(Vector3 position)   {
-        Optional<AreaData> optInsideArea = isInsideSubAreas(position);
+    public AreaInfo isInside(Vector3 position)   {
+        Optional<AreaData> optSubArea = isInsideSubAreas(position);
+        Optional<AreaData> optMainArea = getAreaSize().isInside(position) ? Optional.of(this) : Optional.empty();
 
-        if (optInsideArea.isEmpty())   {
-            boolean positionInside = getAreaSize().isInside(position);
+        AreaInfo areaInfo = buildAreaMapData(optMainArea, optSubArea);
 
-            if (positionInside) optInsideArea = Optional.of(this);
-        }
-
-        return optInsideArea;
+        return areaInfo;
     }
 
     private Optional<AreaData> isInsideSubAreas(Vector3 position)   {
@@ -167,12 +169,28 @@ public class AreaData {
         this.subAreas.put(areaData.getAreaName(), areaData);
 
         AreaManager manager = AreaManager.getInstance();
-        manager.getJsonManager().saveToFile(this.getAreaName(), this);
+        saveAreaToFile();
         this.log.showInfo("SubArea '" + areaData.getAreaName() + "' foi criada com sucesso na area principal '" + this.areaName + "'.");
         return true;
     }
 
+    public Map<String, AreaData> getSubAreas()   {
+        return this.subAreas;
+    }
+
     public String getOwner()   {
         return this.owner;
+    }
+
+    private AreaInfo buildAreaMapData(Optional<AreaData> mainArea, Optional<AreaData> subArea)   {
+        AreaInfo areaInfo = new AreaInfo(mainArea, subArea);
+
+        return areaInfo;
+    }
+
+    public boolean saveAreaToFile() throws IOException {
+        AreaManager manager = AreaManager.getInstance();
+        manager.getJsonManager().saveToFile(this.getAreaName(), this);
+        return true;
     }
 }

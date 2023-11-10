@@ -34,14 +34,14 @@ public class BlockSelectEvent implements Listener {
                 dataContainer.set(new NamespacedKey(BlockSelection.blockSelectionNamespace, BlockSelection.yposLeftClickKey), PersistentDataType.DOUBLE, blockPosition.getY());
                 dataContainer.set(new NamespacedKey(BlockSelection.blockSelectionNamespace, BlockSelection.zposLeftClickKey), PersistentDataType.DOUBLE, blockPosition.getZ());
 
-                Bukkit.getLogger().info("Left Block Selected!!!");
+                //Bukkit.getLogger().info("Left Block Selected!!!");
                 break;
             case RIGHT_CLICK_BLOCK:
                 dataContainer.set(new NamespacedKey(BlockSelection.blockSelectionNamespace, BlockSelection.xposRightClickKey), PersistentDataType.DOUBLE, blockPosition.getX());
                 dataContainer.set(new NamespacedKey(BlockSelection.blockSelectionNamespace, BlockSelection.yposRightClickKey), PersistentDataType.DOUBLE, blockPosition.getY());
                 dataContainer.set(new NamespacedKey(BlockSelection.blockSelectionNamespace, BlockSelection.zposRightClickKey), PersistentDataType.DOUBLE, blockPosition.getZ());
 
-                Bukkit.getLogger().info("Right Block Selected!!!");
+                //Bukkit.getLogger().info("Right Block Selected!!!");
                 break;
         }
     }

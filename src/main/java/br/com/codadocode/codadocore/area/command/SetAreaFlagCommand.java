@@ -1,6 +1,7 @@
 package br.com.codadocode.codadocore.area.command;
 
 import br.com.codadocode.codadocore.area.AreaData;
+import br.com.codadocode.codadocore.area.AreaInfo;
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.core.ConvertUtility;
 import br.com.codadocode.codadocore.core.ServerUtility;
@@ -18,12 +19,12 @@ public class SetAreaFlagCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player)   {
             Player player = (Player)commandSender;
+            Vector3 playerPosition = ConvertUtility.locationToVector3(player.getLocation());
 
-            if (strings.length != 3) return false;
+            if (strings.length != 2) return false;
 
-            String areaName = strings[0];
-            String flagName = strings[1].toUpperCase();
-            String flagValue = strings[2].toLowerCase();
+            String flagName = strings[0].toUpperCase();
+            String flagValue = strings[1].toLowerCase();
 
             if (!flagValue.equals("true") && !flagValue.equals("false"))   {
                 player.sendMessage("Apenas valores 'true' e 'false' podem ser usados nas flags!");
@@ -31,9 +32,11 @@ public class SetAreaFlagCommand implements CommandExecutor {
             }
 
             AreaManager areaManager = AreaManager.getInstance();
-            Optional<AreaData> optAreaData = areaManager.getAreaByName(areaName);
+
+            AreaInfo areaInfo = areaManager.checkVector3InsideArea(playerPosition);
+            Optional<AreaData> optAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() : areaInfo.getMainArea();
             if (optAreaData.isEmpty()){
-                player.sendMessage("Area '" + areaName + "' nao existe!");
+                player.sendMessage("Você não está dentro de nenhuma area!");
                 return true;
             }
 
@@ -44,7 +47,7 @@ public class SetAreaFlagCommand implements CommandExecutor {
                 return true;
             }
 
-            player.sendMessage("Flag '" + flagName + "' foi alterada para '" + flagValue + "' na area '" + areaName + "'.");
+            player.sendMessage("Flag '" + flagName + "' foi alterada para '" + flagValue + "' na area '" + areaData.getAreaName() + "'.");
             return true;
         }
 

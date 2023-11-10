@@ -1,5 +1,6 @@
 package br.com.codadocode.codadocore.area;
 
+import br.com.codadocode.codadocore.area.event.AREA_TYPE;
 import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.DataFolder;
 import br.com.codadocode.codadocore.core.JsonManager;
@@ -101,16 +102,16 @@ public class AreaManager {
         return Optional.of(this.areas.get(areaName));
     }
 
-    public Optional<AreaData> checkVector3InsideArea(Vector3 position)   {
+    public AreaInfo checkVector3InsideArea(Vector3 position)   {
         for (AreaData areaData : this.areas.values())   {
-            Optional<AreaData> areaDataInside = areaData.isInside(position);
+            AreaInfo areaInfo = areaData.isInside(position);
 
-            if (areaDataInside.isEmpty()) continue;
+            if (areaInfo.getMainArea().isEmpty()) continue;
 
-            return Optional.of(areaDataInside.get());
+            return areaInfo;
         }
 
-        return Optional.empty();
+        return new AreaInfo();
     }
 
     public void loadAllAreaData() throws FileNotFoundException {

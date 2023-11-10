@@ -1,8 +1,5 @@
 package br.com.codadocode.codadocore.area.event;
-import br.com.codadocode.codadocore.area.AREA_FLAG;
-import br.com.codadocode.codadocore.area.AreaData;
-import br.com.codadocode.codadocore.area.AreaManager;
-import br.com.codadocode.codadocore.area.AreaPlayer;
+import br.com.codadocode.codadocore.area.*;
 import br.com.codadocode.codadocore.core.ConvertUtility;
 import br.com.codadocode.codadocore.core.Vector3;
 import br.com.codadocode.codadocore.hidename.NametagManager;
@@ -47,7 +44,9 @@ public class AreaEvent implements Listener {
         Player player = event.getPlayer();
         Vector3 blockPosition = ConvertUtility.locationToVector3(event.getBlock().getLocation());
         AreaManager manager = AreaManager.getInstance();
-        Optional<AreaData> optInteractionAreaData = manager.checkVector3InsideArea(blockPosition);
+
+        AreaInfo areaInfo = manager.checkVector3InsideArea(blockPosition);
+        Optional<AreaData> optInteractionAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() :  areaInfo.getMainArea();
 
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
@@ -63,7 +62,9 @@ public class AreaEvent implements Listener {
         Player player = event.getPlayer();
         Vector3 blockPosition = ConvertUtility.locationToVector3(event.getBlock().getLocation());
         AreaManager manager = AreaManager.getInstance();
-        Optional<AreaData> optInteractionAreaData = manager.checkVector3InsideArea(blockPosition);
+
+        AreaInfo areaInfo = manager.checkVector3InsideArea(blockPosition);
+        Optional<AreaData> optInteractionAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() :  areaInfo.getMainArea();
 
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
@@ -81,7 +82,9 @@ public class AreaEvent implements Listener {
         Player player = event.getPlayer();
         Vector3 blockPosition = ConvertUtility.locationToVector3(event.getClickedBlock().getLocation());
         AreaManager manager = AreaManager.getInstance();
-        Optional<AreaData> optInteractionAreaData = manager.checkVector3InsideArea(blockPosition);
+
+        AreaInfo areaInfo = manager.checkVector3InsideArea(blockPosition);
+        Optional<AreaData> optInteractionAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() :  areaInfo.getMainArea();
 
         if (optInteractionAreaData.isEmpty()) return;
         AreaData interactionAreaData = optInteractionAreaData.get();
@@ -103,7 +106,8 @@ public class AreaEvent implements Listener {
 
             AreaManager manager = AreaManager.getInstance();
 
-            Optional<AreaData> optDamagerAreaData = manager.checkVector3InsideArea(damagerPosition);
+            AreaInfo areaInfoDamager = manager.checkVector3InsideArea(damagerPosition);
+            Optional<AreaData> optDamagerAreaData = areaInfoDamager.getSubArea().isPresent() ? areaInfoDamager.getSubArea() :  areaInfoDamager.getMainArea();
             if (optDamagerAreaData.isPresent())   {
                 AreaData damagerAreaData = optDamagerAreaData.get();
 
@@ -115,7 +119,8 @@ public class AreaEvent implements Listener {
                 return;
             }
 
-            Optional<AreaData> optVictimAreaData = manager.checkVector3InsideArea(victimPosition);
+            AreaInfo areaInfoVictim = manager.checkVector3InsideArea(victimPosition);
+            Optional<AreaData> optVictimAreaData = areaInfoVictim.getSubArea().isPresent() ? areaInfoVictim.getSubArea() :  areaInfoVictim.getMainArea();
             if (optVictimAreaData.isPresent())   {
                 AreaData victimAreaData = optDamagerAreaData.get();
 
@@ -133,7 +138,8 @@ public class AreaEvent implements Listener {
         Vector3 entityPosition = ConvertUtility.locationToVector3(entity.getLocation());
         AreaManager manager = AreaManager.getInstance();
 
-        Optional<AreaData> optAreaData = manager.checkVector3InsideArea(entityPosition);
+        AreaInfo areaInfo = manager.checkVector3InsideArea(entityPosition);
+        Optional<AreaData> optAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() :  areaInfo.getMainArea();
         if (optAreaData.isEmpty()) return;
 
         AreaData areaData = optAreaData.get();

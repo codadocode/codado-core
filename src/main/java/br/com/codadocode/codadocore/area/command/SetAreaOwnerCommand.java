@@ -1,6 +1,7 @@
 package br.com.codadocode.codadocore.area.command;
 
 import br.com.codadocode.codadocore.area.AreaData;
+import br.com.codadocode.codadocore.area.AreaInfo;
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.AreaSize;
 import br.com.codadocode.codadocore.core.ConvertUtility;
@@ -22,27 +23,28 @@ public class SetAreaOwnerCommand implements CommandExecutor {
             Player player = (Player)commandSender;
             Vector3 playerPosition = ConvertUtility.locationToVector3(player.getLocation());
 
-            if (strings.length != 2) return false;
+            if (strings.length != 1) return false;
 
-            String areaName = strings[0];
-            String playerName = strings[1];
-
+            String playerName = strings[0];
             AreaManager areaManager = AreaManager.getInstance();
-            Optional<AreaData> optAreaData = areaManager.getAreaByName(areaName);
-            if (optAreaData.isEmpty()){
-                //MESSAGE
+
+            AreaInfo areaInfo = areaManager.checkVector3InsideArea(playerPosition);
+            Optional<AreaData> optFinalArea = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() : areaInfo.getMainArea();
+
+            if (optFinalArea.isEmpty()){
+                player.sendMessage("Você não está dentro de nenhuma area!");
                 return true;
             }
 
-            AreaData areaData = optAreaData.get();
+            AreaData areaData = optFinalArea.get();
             if (!areaData.isOwner(player) || !player.hasPermission("br.com.codadocode.codadocore.area.admin")) {
-                //MESSAGE
+                player.sendMessage("Você não pode trocar o dono dessa região");
                 return true;
             }
 
             Optional<Player> optPlayer = ServerUtility.getPlayerByName(playerName);
             if (optPlayer.isEmpty()) {
-                //MESSAGE
+                player.sendMessage("Player '" + playerName + "' não está online!");
                 return true;
             }
 

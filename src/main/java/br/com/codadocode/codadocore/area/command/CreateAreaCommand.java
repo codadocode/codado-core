@@ -1,6 +1,7 @@
 package br.com.codadocode.codadocore.area.command;
 
 import br.com.codadocode.codadocore.area.AreaData;
+import br.com.codadocode.codadocore.area.AreaInfo;
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.area.AreaSize;
 import br.com.codadocode.codadocore.core.ConvertUtility;
@@ -36,21 +37,23 @@ public class CreateAreaCommand implements CommandExecutor {
             AreaManager areaManager = AreaManager.getInstance();
             List<Vector3> playerSelectedBlocks = optPlayerSelectedBlocks.get();
 
-            Optional<AreaData> optFirstArea = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(0));
-            Optional<AreaData> optSecondArea = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(1));
+            AreaInfo firstAreaInfo = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(0));
+            AreaInfo secondAreaInfo = areaManager.checkVector3InsideArea(playerSelectedBlocks.get(0));
+
+            Optional<AreaData> optFirstArea = firstAreaInfo.getMainArea();
+            Optional<AreaData> optSecondArea = secondAreaInfo.getMainArea();
 
             AreaSize areaSize = new AreaSize(playerSelectedBlocks.get(0), playerSelectedBlocks.get(1));
-            AreaData newAreaData = new AreaData(areaName, areaSize, player);
 
             if ((optFirstArea.isPresent() && optSecondArea.isEmpty()) || (optFirstArea.isEmpty() && optSecondArea.isPresent()))   {
-                //VAI SE TRATAR GAROTAAA
-
+                player.sendMessage("Não é possível criar uma SubArea dentro e fora de uma região!");
                 return true;
             }
 
             if (optFirstArea.isEmpty() && optSecondArea.isEmpty())   {
                 try {
-                    areaManager.createArea(player, newAreaData);
+                    AreaData newMainArea = new AreaData(areaName, areaSize, player, false);
+                    areaManager.createArea(player, newMainArea);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -62,12 +65,13 @@ public class CreateAreaCommand implements CommandExecutor {
                 AreaData secondAreaData = optSecondArea.get();
 
                 if (!firstAreaData.equals(secondAreaData)) {
-                    //ERRO AREAS DIFERENTES
+                    player.sendMessage("Não é possível criar uma SubArea dentro de regiões diferentes! A seleção de posição deve estar dentro da mesma região!");
                     return true;
                 }
 
                 try {
-                    firstAreaData.createSubArea(player, newAreaData);
+                    AreaData newSubArea = new AreaData(areaName, areaSize, player, false);
+                    firstAreaData.createSubArea(player, newSubArea);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -1,5 +1,6 @@
 package br.com.codadocode.codadocore.area.command;
 import br.com.codadocode.codadocore.area.AreaData;
+import br.com.codadocode.codadocore.area.AreaInfo;
 import br.com.codadocode.codadocore.area.AreaManager;
 import br.com.codadocode.codadocore.core.CodadoLog;
 import br.com.codadocode.codadocore.core.ConvertUtility;
@@ -21,15 +22,16 @@ public class ShowAreaInfoCommand implements CommandExecutor {
             AreaManager manager = AreaManager.getInstance();
             Vector3 playerPosition = ConvertUtility.locationToVector3(player.getLocation());
 
-            Optional<AreaData> optAreaData = manager.checkVector3InsideArea(playerPosition);
+            AreaInfo areaInfo = manager.checkVector3InsideArea(playerPosition);
+            Optional<AreaData> optAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() : areaInfo.getMainArea();
             if (optAreaData.isEmpty())   {
                 player.sendMessage("Voce não está dentro de nenhuma região!");
                 return true;
             }
 
             AreaData areaData = optAreaData.get();
-            String areaInfo = "Você esta dentro da area: " + areaData.getAreaName() + ", Dono: " + areaData.getOwner();
-            player.sendMessage(areaInfo);
+            String areaInfoMsg = "Você esta dentro da area: " + areaData.getAreaName() + ", Dono: " + areaData.getOwner();
+            player.sendMessage(areaInfoMsg);
             return true;
         }
 

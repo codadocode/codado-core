@@ -1,8 +1,11 @@
 package br.com.codadocode.codadocore.area.command;
 
 import br.com.codadocode.codadocore.area.AreaData;
+import br.com.codadocode.codadocore.area.AreaInfo;
 import br.com.codadocode.codadocore.area.AreaManager;
+import br.com.codadocode.codadocore.core.ConvertUtility;
 import br.com.codadocode.codadocore.core.ServerUtility;
+import br.com.codadocode.codadocore.core.Vector3;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,16 +19,17 @@ public class DelAreaMemberCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player)   {
             Player player = (Player)commandSender;
+            Vector3 playerPosition = ConvertUtility.locationToVector3(player.getLocation());
 
-            if (strings.length != 2) return false;
-            String areaName = strings[0];
-            String memberName = strings[1];
+            if (strings.length != 1) return false;
+            String memberName = strings[0];
             AreaManager manager = AreaManager.getInstance();
 
-            Optional<AreaData> optAreaData = manager.getAreaByName(areaName);
+            AreaInfo areaInfo = manager.checkVector3InsideArea(playerPosition);
+            Optional<AreaData> optAreaData = areaInfo.getSubArea().isPresent() ? areaInfo.getSubArea() : areaInfo.getMainArea();
             Optional<Player> optFindedPlayer = ServerUtility.getPlayerByName(memberName);
             if (optAreaData.isEmpty())   {
-                player.sendMessage("Area '" + areaName + "' nao existe!");
+                player.sendMessage("Você não está dentro de nenhuma area!");
                 return true;
             }
 

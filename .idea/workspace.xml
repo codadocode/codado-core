@@ -6,8 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1f4b8154-cab2-4798-a1b4-2fc8bf00c48f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/AreaManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/AddAreaMemberCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/AddAreaMemberCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/CreateAreaCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/DelAreaMemberCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/DelAreaMemberCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaFlagCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaFlagCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaOwnerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/SetAreaOwnerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/command/ShowAreaInfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/area/event/AreaEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/tools/event/BlockSelectEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/codadocode/codadocore/tools/event/BlockSelectEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +126,11 @@
       <workItem from="1698622458739" duration="600000" />
       <workItem from="1698635753653" duration="600000" />
       <workItem from="1698710900080" duration="4945000" />
-      <workItem from="1698811619106" duration="7807000" />
+      <workItem from="1698811619106" duration="7912000" />
+      <workItem from="1698883519628" duration="1536000" />
+      <workItem from="1698892560852" duration="4309000" />
+      <workItem from="1698928561695" duration="2546000" />
+      <workItem from="1699578494852" duration="3275000" />
     </task>
     <servers />
   </component>
